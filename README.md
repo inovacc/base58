@@ -1,4 +1,4 @@
-# Base58  [![Go Report Card](https://goreportcard.com/badge/github.com/akamensky/base58)](https://goreportcard.com/report/github.com/akamensky/base58)
+# Base58
 
 This is a Go language package implementing base58 encoding/decoding algorithms. This implementation attempts to optimize performance of encoding and decoding data to be used with other applications.
 
@@ -10,41 +10,39 @@ There are other widely used methods to encode/decode raw data into printable for
 
 The alphabet of this encoding can be presented as below:
 
-```
-Alphabet:       0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
-Base58:          123456789ABCDEFGH JKLMN PQRSTUVWXYZabcdefghijk mnopqrstuvwxyz
-
-Base64:         ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=
+```text
+Alphabet:       123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz
+Base58:         123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz
 ```
 
 ## Installation
 
 To install and use this package simply use standard go tools:
 
-```
-$ go get -x -u github.com/akamensky/base58
+```bash
+$ go get -x -u github.com/dyammarcano/base58
 ```
 
 And then include this package in your project
 
-```
-import "github.com/akamensky/base58"
+```go
+import "github.com/dyammarcano/base58"
 ```
 
 ## Usage
 
 `base58.Encode` takes slice of bytes. The reason for this is to be able to encode ANY types of data (as long as it is possible to present it as a slice of bytes):
 
-```
+```go
     var unencoded []byte = ...
-    var encoded string = base58.Encode(unencoded)
+    var encoded string = base58.StdEncoding.EncodeToString(unencoded)
 ```
 
 `base58.Decode` takes string as an input and returns slice of bytes, which can be converted/cast to original type. If the passed string contains characters invalid for base58 encoding then the returned error is not `nil`:
 
-```
+```go
     var encoded string = ...
-    decoded, err := base58.Decode(encoded)
+    decoded, err := base58.StdEncoding.Decode(encoded)
     if err != nil {
         ...
     }
@@ -54,7 +52,7 @@ import "github.com/akamensky/base58"
 
 Below is example of encoding and decoding random bytes:
 
-```
+```go
 package main
 
 import (
@@ -62,7 +60,7 @@ import (
     "log"
     "fmt"
     "encoding/hex"
-    "github.com/akamensky/base58"
+    "github.com/dyammarcano/base58"
 )
 
 func main() {
@@ -77,11 +75,11 @@ func main() {
     fmt.Println("Random data to encode: ", hex.EncodeToString(data))
     
     // Encode generated data to base58 and print it
-    encoded := base58.Encode(data)
+    encoded := base58.StdEncoding.Encode(data)
     fmt.Println("Base58 encoded data  : ", encoded)
     
     // Decode base58 string to bytes and print it in HEX format for inspection
-    decoded, err := base58.Decode(encoded)
+    decoded, err := base58.StdEncoding.Decode(encoded)
     if err != nil {
         log.Fatal(err)
     }
@@ -94,8 +92,8 @@ func main() {
 
 To run tests and benchmarks simply use:
 
-```
-$ cd $(go env GOPATH)/src/github.com/akamensky/base58
+```bash
+$ cd $(go env GOPATH)/src/github.com/dyammarcano/base58
 $ go test
 $ go test -bench=.
 ```
