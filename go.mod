@@ -1,3 +1,3 @@
-module github.com/dyammarcano/base58
+module github.com/inovacc/base58
 
-go 1.20
+go 1.22
