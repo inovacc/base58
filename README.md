@@ -11,8 +11,10 @@ There are other widely used methods to encode/decode raw data into printable for
 The alphabet of this encoding can be presented as below:
 
 ```text
-Alphabet:       123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz
-Base58:         123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz
+Alphabet:       0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+Base58:          123456789ABCDEFGH JKLMN PQRSTUVWXYZabcdefghijk mnopqrstuvwxyz
+
+Base64:         ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=
 ```
 
 ## Installation
@@ -20,13 +22,13 @@ Base58:         123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz
 To install and use this package simply use standard go tools:
 
 ```bash
-$ go get -x -u github.com/dyammarcano/base58
+$ go get -x -u github.com/inovacc/base58
 ```
 
 And then include this package in your project
 
 ```go
-import "github.com/dyammarcano/base58"
+import "github.com/inovacc/base58"
 ```
 
 ## Usage
@@ -60,7 +62,7 @@ import (
     "log"
     "fmt"
     "encoding/hex"
-    "github.com/dyammarcano/base58"
+    "github.com/inovacc/base58"
 )
 
 func main() {
@@ -93,20 +95,14 @@ func main() {
 To run tests and benchmarks simply use:
 
 ```bash
-$ cd $(go env GOPATH)/src/github.com/dyammarcano/base58
+$ cd $(go env GOPATH)/src/github.com/inovacc/base58
 $ go test
 $ go test -bench=.
 ```
 
-## Contributing
-
-I welcome any contribution to this library, especially those targeting performance improvements.
-
-Please read [CONTRIBUTING](CONTRIBUTING) beforehand.
-
 ## License
 
-This project is licensed under the UNLICENSE License - see the [LICENSE](LICENSE) file for details
+This project is licensed under the UNLICENSE License - see the [LICENSE](UNLICENSE) file for details
 
 ## Acknowledgments
 
